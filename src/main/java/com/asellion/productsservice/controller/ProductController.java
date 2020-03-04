@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.asellion.productsservice.exception.ProductException;
 import com.asellion.productsservice.model.Product;
 import com.asellion.productsservice.model.ProductDTO;
 import com.asellion.productsservice.service.ProductService;
@@ -46,8 +47,8 @@ public class ProductController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Product> updateProduct( @RequestBody(required = true) ProductDTO productDTO ){
-		final Product product = this.productService.updateProduct(productDTO);
+	public ResponseEntity<Product> updateProduct( @PathVariable("id") Long id, @RequestBody(required = true) ProductDTO productDTO ) throws ProductException{
+		final Product product = this.productService.updateProduct(id, productDTO);
 		
 		return new ResponseEntity<Product>(product, HttpStatus.OK);
 	}

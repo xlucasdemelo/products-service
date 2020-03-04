@@ -2,6 +2,7 @@ package com.asellion.productsservice.service;
 
 import java.util.List;
 
+import com.asellion.productsservice.exception.ProductException;
 import com.asellion.productsservice.model.Product;
 import com.asellion.productsservice.model.ProductDTO;
 
@@ -36,7 +37,7 @@ public interface ProductService {
 	 * @param productDTO
 	 * @return
 	 */
-	Product updateProduct(ProductDTO productDTO);
+	Product updateProduct(long id, ProductDTO productDTO) throws ProductException;
 	
 	/**
 	 * This method will create a new Product 
