@@ -5,6 +5,7 @@ import javax.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.transaction.TransactionSystemException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -41,5 +42,11 @@ public class Exceptionhandler {
 		@ExceptionHandler(value = ConstraintViolationException.class)
 		public ResponseEntity<String> exception(final ConstraintViolationException e) {
 			return new ResponseEntity<String>("blba", HttpStatus.BAD_REQUEST);
+		}
+		
+		@ResponseStatus(HttpStatus.BAD_REQUEST)
+		@ExceptionHandler(value = TransactionSystemException.class)
+		public ResponseEntity<String> exception(final TransactionSystemException e) {
+			return new ResponseEntity<String>("TransactionSystemException", HttpStatus.BAD_REQUEST);
 		}
 }

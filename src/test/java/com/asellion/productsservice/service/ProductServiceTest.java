@@ -1,7 +1,5 @@
 package com.asellion.productsservice.service;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasProperty;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 

@@ -2,8 +2,6 @@ package com.asellion.productsservice.model;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Entity;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
