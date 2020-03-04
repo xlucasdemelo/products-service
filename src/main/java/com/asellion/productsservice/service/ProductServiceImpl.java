@@ -10,6 +10,7 @@ import com.asellion.productsservice.exception.ProductNotFoundException;
 import com.asellion.productsservice.model.Product;
 import com.asellion.productsservice.model.ProductDTO;
 import com.asellion.productsservice.repository.ProductRepository;
+import com.asellion.productsservice.util.ProductConstants;
 import com.asellion.productsservice.util.ProductMapper;
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,12 +32,13 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public Product getProductById(long id) throws ProductNotFoundException {
+		log.info(ProductConstants.RETRIEVING_ALL_PRODUCTS_FROM_DATABASE);
 		return this.productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException() );
 	}
 	
 	@Override
 	public Product updateProduct(long id, ProductDTO productDTO) throws ProductException {
-		log.info("Updating Id: " + id);
+		log.info(ProductConstants.UPDATING_PRODUCT_WITH_ID + id);
 		final Product product = this.productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException() );
 		
 		this.mapper.mergeDTOToEntity(productDTO, product);
@@ -46,8 +48,7 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public Product insertProduct(ProductDTO productDTO) {
-		log.info("Saving ");
-		
+		log.info(ProductConstants.SAVING_PRODUCT);
 		return this.productRepository.save(this.mapper.dtoToEntity(productDTO));
 	}
 }

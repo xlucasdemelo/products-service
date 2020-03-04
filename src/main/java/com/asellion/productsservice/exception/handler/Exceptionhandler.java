@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.asellion.productsservice.util.ProductConstants;
+
 /**
  * Class That will handle Exceptions from the application
  * @author lucas
@@ -29,7 +31,7 @@ public class Exceptionhandler {
 		@ResponseStatus(HttpStatus.BAD_REQUEST)
 		@ExceptionHandler(value = HttpMessageNotReadableException.class)
 		public ResponseEntity<String> exception(final HttpMessageNotReadableException e) {
-			return new ResponseEntity<String>("aaa", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>(ProductConstants.BODY_SHOULD_NOT_BE_NULL, HttpStatus.BAD_REQUEST);
 		}
 		
 		/**
@@ -41,7 +43,7 @@ public class Exceptionhandler {
 		@ResponseStatus(HttpStatus.BAD_REQUEST)
 		@ExceptionHandler(value = ConstraintViolationException.class)
 		public ResponseEntity<String> exception(final ConstraintViolationException e) {
-			return new ResponseEntity<String>("blba", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>(ProductConstants.REQUIRED_FIELDS_ARE_MISSING, HttpStatus.BAD_REQUEST);
 		}
 		
 		/**
@@ -52,6 +54,6 @@ public class Exceptionhandler {
 		@ResponseStatus(HttpStatus.BAD_REQUEST)
 		@ExceptionHandler(value = TransactionSystemException.class)
 		public ResponseEntity<String> exception(final TransactionSystemException e) {
-			return new ResponseEntity<String>("TransactionSystemException", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>(ProductConstants.REQUIRED_FIELDS_ARE_MISSING, HttpStatus.BAD_REQUEST);
 		}
 }
