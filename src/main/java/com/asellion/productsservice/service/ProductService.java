@@ -3,6 +3,7 @@ package com.asellion.productsservice.service;
 import java.util.List;
 
 import com.asellion.productsservice.exception.ProductException;
+import com.asellion.productsservice.exception.ProductNotFoundException;
 import com.asellion.productsservice.model.Product;
 import com.asellion.productsservice.model.ProductDTO;
 
@@ -29,7 +30,7 @@ public interface ProductService {
 	 * @param id
 	 * @return
 	 */
-	Product getProductById(long id);
+	Product getProductById(long id) throws ProductNotFoundException;
 	
 	/**
 	 * This method will update a existent Product register 

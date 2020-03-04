@@ -1,10 +1,14 @@
 package com.asellion.productsservice.service;
 
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasProperty;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.ConstraintViolationException;
@@ -111,5 +115,33 @@ public class ProductServiceTest {
 		Mockito.when(this.productRepository.findById(any(Long.class)) ).thenReturn(Optional.empty());
 		final ProductDTO productDTO = new ProductDTO("Iphone12", new BigDecimal("800"));
 		this.productService.updateProduct(101L, productDTO);
+	}
+	
+	@Test
+	public void testListAllProjects_mustReturnAll(){
+		List<Product> products = new ArrayList<Product>();
+		products.add(this.getSampleProduct());
+		
+		Mockito.when(this.productRepository.findAll() ).thenReturn(products);
+		
+		products = this.productService.listProducts();
+		
+		assertThat(products, Matchers.notNullValue());
+		assertThat(products, Matchers.hasSize(1));
+	}
+	
+	@Test
+	public void testListProjectByIdReturnOne() throws ProductNotFoundException{
+		Mockito.when(this.productRepository.findById((any(Long.class))) ).thenReturn( Optional.of(this.getSampleProduct()) );
+		
+		final Product product = this.productService.getProductById(100L);
+		
+		assertThat(product, Matchers.notNullValue());
+	}
+	
+	@Test(expected = ProductNotFoundException.class)
+	public void testListProjectById_nonExistentId() throws ProductNotFoundException{
+		Mockito.when(this.productRepository.findById((any(Long.class))) ).thenReturn( Optional.empty() );
+		this.productService.getProductById(100L);
 	}
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.asellion.productsservice.exception.ProductException;
+import com.asellion.productsservice.exception.ProductNotFoundException;
 import com.asellion.productsservice.model.Product;
 import com.asellion.productsservice.model.ProductDTO;
 import com.asellion.productsservice.service.ProductService;
@@ -40,7 +41,7 @@ public class ProductController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Product> getProductById(@PathVariable("id") Long id){
+	public ResponseEntity<Product> getProductById(@PathVariable("id") Long id) throws ProductNotFoundException{
 		final Product product = this.productService.getProductById(id);
 		
 		return new ResponseEntity<Product>(product, HttpStatus.OK);
