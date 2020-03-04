@@ -44,6 +44,11 @@ public class Exceptionhandler {
 			return new ResponseEntity<String>("blba", HttpStatus.BAD_REQUEST);
 		}
 		
+		/**
+		 * 
+		 * @param e
+		 * @return
+		 */
 		@ResponseStatus(HttpStatus.BAD_REQUEST)
 		@ExceptionHandler(value = TransactionSystemException.class)
 		public ResponseEntity<String> exception(final TransactionSystemException e) {
