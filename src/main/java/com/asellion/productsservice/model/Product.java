@@ -1,9 +1,10 @@
 package com.asellion.productsservice.model;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -44,6 +45,7 @@ public class Product {
 	
 	@PrePersist
 	private void initializeCurrentPrice() {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		this.lastUpdated = Calendar.getInstance();
 	}
 }
