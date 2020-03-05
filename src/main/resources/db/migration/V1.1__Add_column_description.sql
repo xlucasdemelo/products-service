@@ -1,1 +1,1 @@
-alter table PRODUCT add desctription varchar(255);
+alter table PRODUCT add description varchar(255);
