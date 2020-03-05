@@ -1,0 +1,1 @@
+alter table PRODUCT add desctription varchar(255);

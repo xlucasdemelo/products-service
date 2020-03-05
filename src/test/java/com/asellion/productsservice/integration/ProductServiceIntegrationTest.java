@@ -55,7 +55,7 @@ public class ProductServiceIntegrationTest {
    @Test
    @Sql(scripts = "classpath:data.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
    public void sendPayload_ShouldFailWithoutMandatoryFields() throws Exception {
-	   final ProductDTO product = new ProductDTO("Samsung Galaxy X", null);
+	   final ProductDTO product = new ProductDTO("Samsung Galaxy X", null, "Description");
 	   
 	   ObjectMapper mapper = new ObjectMapper();
 	   
@@ -75,7 +75,7 @@ public class ProductServiceIntegrationTest {
   @Test
   @Sql(scripts = "classpath:data.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
   public void updateProduct_successCase() throws Exception {
-	  final ProductDTO productDTO = new ProductDTO("Samsung Galaxy X", new BigDecimal("100"));
+	  final ProductDTO productDTO = new ProductDTO("Samsung Galaxy X", new BigDecimal("100"),"Description");
 	  ObjectMapper mapper = new ObjectMapper();
 	  
       this.mockMvc.perform(MockMvcRequestBuilders.put("/api/products/100")
@@ -95,7 +95,7 @@ public class ProductServiceIntegrationTest {
 	@Test
 	@Sql(scripts = "classpath:data.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	public void updateProduct_failWithoutMandatoryFields() throws Exception {
-		  final ProductDTO productDTO = new ProductDTO("Samsung Galaxy X", null);
+		  final ProductDTO productDTO = new ProductDTO("Samsung Galaxy X", null, "Description");
 		  ObjectMapper mapper = new ObjectMapper();
 		  
 	    this.mockMvc.perform(MockMvcRequestBuilders.put("/api/products/100")
@@ -109,7 +109,7 @@ public class ProductServiceIntegrationTest {
 	@Test
 	@Sql(scripts = "classpath:data.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	public void updateProduct_failNonExistentProduct() throws Exception {
-		  final ProductDTO productDTO = new ProductDTO("Samsung Galaxy X", new BigDecimal("100"));
+		  final ProductDTO productDTO = new ProductDTO("Samsung Galaxy X", new BigDecimal("100"), "Description");
 		  ObjectMapper mapper = new ObjectMapper();
 		  
 	    this.mockMvc.perform(MockMvcRequestBuilders.put("/api/products/1")

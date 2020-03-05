@@ -36,6 +36,8 @@ public class Product {
 	
 	private Calendar lastUpdated;
 	
+	private String description;
+	
 	public Product(String name, BigDecimal currentPrice) {
 		this.name = name;
 		this.currentPrice = currentPrice;

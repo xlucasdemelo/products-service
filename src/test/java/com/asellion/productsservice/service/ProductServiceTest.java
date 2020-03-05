@@ -48,7 +48,7 @@ public class ProductServiceTest {
 	private ProductMapper productMapper;
 	
 	private Product getSampleProduct() {
-		return new Product(100L, "Iphone11", new BigDecimal("700"), Calendar.getInstance());
+		return new Product(100L, "Iphone11", new BigDecimal("700"), Calendar.getInstance(), "Description");
 	}
 	
 	/**
@@ -59,13 +59,14 @@ public class ProductServiceTest {
 		Mockito.when(this.productMapper.dtoToEntity(any(ProductDTO.class))).thenReturn(this.getSampleProduct());
 		Mockito.when(this.productRepository.save(any(Product.class))).thenReturn(this.getSampleProduct());
 		
-		final ProductDTO productDTO = new ProductDTO("Iphone12", new BigDecimal("800"));
+		final ProductDTO productDTO = new ProductDTO("Iphone12", new BigDecimal("800"), "Description");
 		final Product product = this.productService.insertProduct(productDTO);
 		
 		assertThat(product, Matchers.notNullValue());
 		assertThat(product.getId(), Matchers.notNullValue());
 		assertThat(product.getCurrentPrice(), Matchers.notNullValue());
 		assertThat(product.getLastUpdated(), Matchers.notNullValue());
+		assertThat(product.getDescription(), Matchers.notNullValue());
 	}
 	
 	/**
@@ -79,7 +80,7 @@ public class ProductServiceTest {
 		Mockito.when(this.productMapper.dtoToEntity(any(ProductDTO.class))).thenReturn(product);
 		Mockito.when(this.productRepository.save(any(Product.class))).thenThrow(ConstraintViolationException.class);
 		
-		final ProductDTO productDTO = new ProductDTO("Iphone12", null);
+		final ProductDTO productDTO = new ProductDTO("Iphone12", null, "Description");
 		product = this.productService.insertProduct(productDTO);
 		
 		assertThat(product, IsNull.nullValue());
@@ -97,21 +98,25 @@ public class ProductServiceTest {
 	@Test
 	public void testUpdateProduct_successCase() throws ProductException{
 		Mockito.when(this.productRepository.findById((any(Long.class))) ).thenReturn( Optional.of(this.getSampleProduct()) );
-		Mockito.when(this.productRepository.save(any(Product.class))).thenReturn(this.getSampleProduct());
+		Mockito.when(this.productRepository.save(any(Product.class))).thenReturn(new Product(100L, "Iphone12", new BigDecimal("800"), Calendar.getInstance(), "Description2" ));
 		
-		final ProductDTO productDTO = new ProductDTO("Iphone12", new BigDecimal("800"));
+		final ProductDTO productDTO = new ProductDTO("Iphone12", new BigDecimal("800"), "Description2");
 		final Product product = this.productService.updateProduct(100L, productDTO);
 		
 		assertThat(product, Matchers.notNullValue());
 		assertThat(product.getId(), Matchers.notNullValue());
+		assertThat(product.getName(), Matchers.equalTo("Iphone12"));
 		assertThat(product.getCurrentPrice(), Matchers.notNullValue());
+		assertThat(product.getCurrentPrice(), Matchers.equalTo(new BigDecimal("800")));
 		assertThat(product.getLastUpdated(), Matchers.notNullValue());
+		assertThat(product.getDescription(), Matchers.notNullValue());
+		assertThat(product.getDescription(), Matchers.equalTo("Description2"));
 	}
 	
 	@Test(expected = ProductNotFoundException.class)
 	public void testUpdateProduct_mustFailWithNonExistentId() throws ProductException{
 		Mockito.when(this.productRepository.findById(any(Long.class)) ).thenReturn(Optional.empty());
-		final ProductDTO productDTO = new ProductDTO("Iphone12", new BigDecimal("800"));
+		final ProductDTO productDTO = new ProductDTO("Iphone12", new BigDecimal("800"), "Description");
 		this.productService.updateProduct(101L, productDTO);
 	}
 	

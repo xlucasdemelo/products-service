@@ -17,7 +17,5 @@ public class ProductDTO {
 	
 	private BigDecimal currentPrice;
 	
-	public Product toEntity() {
-		return new Product(this.name, this.currentPrice);
-	}
+	private String description;
 }
