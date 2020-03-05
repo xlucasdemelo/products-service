@@ -43,8 +43,7 @@ public class ProductServiceIntegrationTest {
                .contentType(MediaType.APPLICATION_JSON)
                
        )
-       .andExpect(status().is2xxSuccessful())
-       .andExpect(content().json("{\"id\":102,\"name\":\"Product55\",\"currentPrice\":200}"));
+       .andExpect(status().is2xxSuccessful());
    }
    
    /**
