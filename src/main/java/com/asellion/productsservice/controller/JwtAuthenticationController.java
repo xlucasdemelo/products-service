@@ -19,7 +19,6 @@ import com.asellion.productsservice.security.JwtTokenUtil;
 import com.asellion.productsservice.service.JwtUserDetailsService;
 
 @RestController
-@CrossOrigin
 public class JwtAuthenticationController {
 	
 	@Autowired
