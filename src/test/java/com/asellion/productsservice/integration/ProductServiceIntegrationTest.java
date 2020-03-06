@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -35,6 +36,7 @@ public class ProductServiceIntegrationTest {
 	 * 
 	 * @throws Exception
 	 */
+   @WithMockUser(value = "javainuse")
    @Test
    @Sql(scripts = "classpath:data.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
    public void sendPayload_ShouldCreateProduct() throws Exception {
@@ -51,6 +53,7 @@ public class ProductServiceIntegrationTest {
     * 
     * @throws Exception
     */
+   @WithMockUser(value = "javainuse")
    @Test
    @Sql(scripts = "classpath:data.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
    public void sendPayload_ShouldFailWithoutMandatoryFields() throws Exception {
@@ -71,6 +74,7 @@ public class ProductServiceIntegrationTest {
 	 * 
 	 * @throws Exception
 	 */
+  @WithMockUser(value = "javainuse")
   @Test
   @Sql(scripts = "classpath:data.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
   public void updateProduct_successCase() throws Exception {
@@ -91,6 +95,7 @@ public class ProductServiceIntegrationTest {
 	 * 
 	 * @throws Exception
 	 */
+  	@WithMockUser(value = "javainuse")
 	@Test
 	@Sql(scripts = "classpath:data.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	public void updateProduct_failWithoutMandatoryFields() throws Exception {
@@ -105,6 +110,7 @@ public class ProductServiceIntegrationTest {
 	    .andExpect(status().is4xxClientError());
 	}
 	
+  	@WithMockUser(value = "javainuse")
 	@Test
 	@Sql(scripts = "classpath:data.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	public void updateProduct_failNonExistentProduct() throws Exception {
@@ -119,6 +125,7 @@ public class ProductServiceIntegrationTest {
 	    .andExpect(status().is4xxClientError());
 	}
 	
+  	@WithMockUser(value = "javainuse")
 	@Test
 	@Sql(scripts = "classpath:data.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	public void findAllProducts() throws Exception {
@@ -130,6 +137,7 @@ public class ProductServiceIntegrationTest {
 	 * Test find by id
 	 * @throws Exception
 	 */
+  	@WithMockUser(value = "javainuse")
 	@Test
 	@Sql(scripts = "classpath:data.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	public void findProductById() throws Exception {
@@ -142,6 +150,7 @@ public class ProductServiceIntegrationTest {
 	 * Test find by id With non existent ID
 	 * @throws Exception
 	 */
+  	@WithMockUser(value = "javainuse")
 	@Test
 	@Sql(scripts = "classpath:data.sql", executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 	public void findProductById_nonExistentProduct() throws Exception {
