@@ -148,9 +148,6 @@ curl http://localhost:8080/api/products/2 --header "Content-Type: application/js
 
 ### Logs
 
-I've implemented a custom log4j2 log appender to log the id of the DIFF for each operation, so we can keep track of the operations performed for each Diff object.
-
-
 All the requests sent to the application will have a unique transaction ID, 
 We can use this to integrate with a machine data application like Splunk and investigate operations for each transaction.
 
