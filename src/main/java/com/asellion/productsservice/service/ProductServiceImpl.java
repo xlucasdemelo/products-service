@@ -27,12 +27,13 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public List<Product> listProducts(){
+		log.info(ProductConstants.RETRIEVING_ALL_PRODUCTS_FROM_DATABASE);
 		return this.productRepository.findAll();
 	}
 	
 	@Override
 	public Product getProductById(long id) throws ProductNotFoundException {
-		log.info(ProductConstants.RETRIEVING_ALL_PRODUCTS_FROM_DATABASE);
+		log.info(ProductConstants.FIND_BY_ID + id);
 		return this.productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException() );
 	}
 	

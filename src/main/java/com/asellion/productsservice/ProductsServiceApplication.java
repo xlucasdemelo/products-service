@@ -25,6 +25,7 @@ public class ProductsServiceApplication {
 	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 	    CorsConfiguration config = new CorsConfiguration();
 	    config.setAllowCredentials(true);
+	    config.addAllowedOrigin("*");
 	    config.setAllowedOrigins(Collections.singletonList("*"));
 	    config.setAllowedMethods(Collections.singletonList("*"));
 	    config.setAllowedHeaders(Collections.singletonList("*"));

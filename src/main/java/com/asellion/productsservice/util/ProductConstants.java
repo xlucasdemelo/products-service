@@ -3,6 +3,7 @@ package com.asellion.productsservice.util;
 public class ProductConstants {
 	//log messages
 	public static final String RETRIEVING_ALL_PRODUCTS_FROM_DATABASE = "Retrieving all products from database";
+	public static final String FIND_BY_ID = "Find By id: ";
 	public static final String UPDATING_PRODUCT_WITH_ID = "Updating Product with id: ";
 	public static final String SAVING_PRODUCT = "Saving Product";
 	
