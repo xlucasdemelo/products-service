@@ -80,7 +80,6 @@ The application will run at http://localhost:8080
 ### AWS running application
 
 The application its deployed in AWS using EBS.
-
 You can send the sample requests listed below to: http://asellionproductsservice-env-1.eba-n74xmghk.us-east-2.elasticbeanstalk.com:8080
 
 
@@ -158,7 +157,7 @@ We can use this to integrate with a machine data application like Splunk and inv
 ```
 ### DB migration
 
-I am using Flyway for DB migration, the sql files are a **src/main/resources/migration**
+I am using Flyway for DB migration, the sql files are at **src/main/resources/migration**
 
 ### Documentation
 
