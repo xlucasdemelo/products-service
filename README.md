@@ -29,6 +29,12 @@ Clone the project
 git clone https://github.com/xlucasdemelo/products-service
 ```
 
+Make sure you have a postgres instance running, you can set the db properties at application.properites or export the following env variables 
+
+* DB_HOST=192.168.100.4
+* DB_USER=postgres 
+* DB_PASSWORD=postgres
+
 to start the application:
 
 ```
@@ -114,7 +120,7 @@ curl http://localhost:8080/authenticate --header "Content-Type: application/json
 
 
 ```
-curl http://localhost:8080/api/products --header "Content-Type: application/json" --header "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU4MzYyNzY3MCwiaWF0IjoxNTgzNjA5NjcwfQ.WdayMZ5D3bBUs4Dt38J9R2YNJVfpQlcNv2G36Iif6g80_lhBNTo42yxWKTyqO7KJ71iJeyJ8CKMfTKvIICt9aw" --request POST --data '{"name":"Samsung S10", "currentPrice":"300", "description":"This is a cellphone"}'
+curl http://localhost:8080/api/products --header "Content-Type: application/json" --header "Authorization: Bearer <jwt_token>" --request POST --data '{"name":"Samsung S10", "currentPrice":"300", "description":"This is a cellphone"}'
 ```
 	Sample response: {"id":2,"name":"Samsung S10","currentPrice":300,"lastUpdated":"2020-03-07T19:46:10.751+0000","description":"This is a cellphone"}
 	
@@ -124,7 +130,7 @@ curl http://localhost:8080/api/products --header "Content-Type: application/json
 * In the header use the token retrieved at step #1 with "Bearer" before
 
 ```
-curl http://localhost:8080/api/products/2 --header "Content-Type: application/json" --header "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU4MzYyNzY3MCwiaWF0IjoxNTgzNjA5NjcwfQ.WdayMZ5D3bBUs4Dt38J9R2YNJVfpQlcNv2G36Iif6g80_lhBNTo42yxWKTyqO7KJ71iJeyJ8CKMfTKvIICt9aw" --request PUT --data '{"name":"Samsung S10", "currentPrice":"500", "description":"This is not a cellphone"}'
+curl http://localhost:8080/api/products/2 --header "Content-Type: application/json" --header "Authorization: Bearer <jwt_token>" --request PUT --data '{"name":"Samsung S10", "currentPrice":"500", "description":"This is not a cellphone"}'
 {"id":2,"name":"Samsung S10","currentPrice":500,"lastUpdated":"2020-03-07T19:46:10.751+0000","description":"This is not a cellphone"}
 ```
 	Sample response: {"id":2,"name":"Samsung S10","currentPrice":500,"lastUpdated":"2020-03-07T19:46:10.751+0000","description":"This is not a cellphone"}
@@ -134,7 +140,7 @@ curl http://localhost:8080/api/products/2 --header "Content-Type: application/js
 * In the header use the token retrieved at step #1 with "Bearer" before
 
 ```
-curl http://localhost:8080/api/products/ --header "Content-Type: application/json" --header "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU4MzYyNzY3MCwiaWF0IjoxNTgzNjA5NjcwfQ.WdayMZ5D3bBUs4Dt38J9R2YNJVfpQlcNv2G36Iif6g80_lhBNTo42yxWKTyqO7KJ71iJeyJ8CKMfTKvIICt9aw" --request GET
+curl http://localhost:8080/api/products/ --header "Content-Type: application/json" --header "Authorization: Bearer <jwt_token>" --request GET
 ```
 It will return a list with all the products
 
@@ -142,7 +148,7 @@ It will return a list with all the products
 * In the header use the token retrieved at step #1 with "Bearer" before
 
 ```
-curl http://localhost:8080/api/products/2 --header "Content-Type: application/json" --header "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU4MzYyNzY3MCwiaWF0IjoxNTgzNjA5NjcwfQ.WdayMZ5D3bBUs4Dt38J9R2YNJVfpQlcNv2G36Iif6g80_lhBNTo42yxWKTyqO7KJ71iJeyJ8CKMfTKvIICt9aw" --request GET
+curl http://localhost:8080/api/products/2 --header "Content-Type: application/json" --header "Authorization: Bearer <jwt_token>" --request GET
 ```
 
 ### Logs
