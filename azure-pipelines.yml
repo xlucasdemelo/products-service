@@ -34,7 +34,7 @@ stages:
       displayName: 'Maven Package'
       inputs:
         mavenPomFile: 'pom.xml'
-        mavenOptions: '-DskipTests'
+        options: '-DskipTests -Dspring.profiles.active=azure'
 
     - task: CopyFiles@2
       displayName: 'Copy Files to artifact staging directory'
